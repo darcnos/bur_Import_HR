@@ -32,7 +32,6 @@ tem = open(path + 'dividerstomatch.txt', 'r')
 dividerstomatch = tem.read().splitlines()
 dividerstomatch = [x.lower() for x in dividerstomatch]
 
-
 # Same as above
 tem = open(path + 'dividerstoreplace.txt', 'r')
 dividerstoreplace = tem.read().splitlines()
