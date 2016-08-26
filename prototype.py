@@ -82,7 +82,7 @@ def get_emp_num(i):
     empl_num_patter = re.compile('\d{6,14} -')
     if empl_num_patter.search(word) is not None:
         employee_info = re.findall(empl_num_patter, word)
-        return = re.findall('\d{6,14}', str(employee_info))
+        return re.findall('\d{6,14}', str(employee_info))
     else:
         return '999999'
 
@@ -146,3 +146,12 @@ def get_sep_mapping(i):
     div_mapping = str(get_div_mapping(i)).lower()
     return str(separator_lookup_dict[str(div_mapping)]).lower()
 
+for i in range(1003):
+    emp_num = str(get_emp_num(i))
+    emp_num2 = emp_num.strip("[']")
+    fname = str(get_filename(i))
+    div_map = str(get_div_mapping(i))
+    sep_map = str(get_sep_mapping(i))
+    fpath = str(full_file_path[i])
+
+    print '"' + emp_num2 + '","' + fname + '","' + div_map + '","' + sep_map + '","' +  fpath + '"'
