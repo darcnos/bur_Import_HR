@@ -20,11 +20,8 @@ def get_filepaths(directory):
 
     return file_paths  # Self-explanatory.
 
-# Run the above function and store its results in a variable.
-full_file_path = get_filepaths(filepath)
-
 # Define our workspace
-path = "C:\\Burris_rename\\resources\\"
+path = 'C:\\Burris_rename\\resources\\'
 filepath = 'C:\\Burris_rename\\WebDocs\\'
 
 # Read resources into memory, parse into a list
@@ -50,6 +47,10 @@ separatorstoreplace = [x.lower() for x in separatorstoreplace]
 # Zip our lists together into a associated dict
 divider_lookup_dict = dict(zip(dividerstomatch, dividerstoreplace))
 separator_lookup_dict = dict(zip(separatorstomatch, separatorstoreplace))
+
+# Run the above function and store its results in a variable.
+full_file_path = get_filepaths(filepath)
+i = 0
 
 
 def is_w4(i):
@@ -84,23 +85,21 @@ def get_emp_num(i):
         employee_number = re.findall('\d{6,14}', str(employee_info))
         return employee_number
     else:
-        employee_number = ['999999']
-        return employee_number
+#        employee_number = ['999999']
+        return '999999'
 
 
 def get_filename_and_extension(i):
     # Returns the filename with its extension
     head, tail = os.path.split(full_file_path[i])
-    filename = tail
-    return filename
+    return tail
 
 
 def get_filename(i):
     # Returns the  filename without its extension
     foo = os.path.splitext(full_file_path[i])[0]
     head, tail = os.path.split(foo)
-    filename = tail
-    return filename
+    return tail
 
 
 def is_emp_dir(div_map_input):
@@ -118,40 +117,34 @@ def get_div_map_input(i):
     div_map_path = "\\".join(full_file_path[i].split('\\')[:-1]).lower()
     foo = div_map_path.rsplit('\\')
     foo.reverse()
-    shiggy = 0
-    for shiggy in range(10):
-        div_map_input = foo[shiggy]
+    itercount = 0
+    for itercount in range(10):
+        div_map_input = foo[itercount]
         if is_emp_dir(div_map_input) == True or bool(re.search('999999', emp_num)) == True:
             return 'historical data'
         else:
-            if divider_lookup_dict.has_key(str(foo[int(shiggy)])) == True:
-                div_map_input = str(foo[int(shiggy)])
+            if divider_lookup_dict.has_key(str(foo[int(itercount)])) == True:
+                div_map_input = str(foo[int(itercount)])
                 return div_map_input
             else:
-                shiggy = shiggy + 1
+                itercount = itercount + 1
 
 
 def get_div_mapping(i):
     # Returns the divider mapping based on the divider input
     if is_i9(i) == True:
-        div_mapping = "I-9".lower()
-        return div_mapping
+        return "I-9".lower()
     elif is_w4(i) == True:
-        div_mapping = "W-4-Federal".lower()
-        return div_mapping
-#    elif get_div_mapping(i) == "historical data":
+        return "W-4-Federal".lower()
     elif is_emp_dir == True:
-        div_mapping = 'historical data'
-        return div_mapping
+        return 'historical data'
     else:
         div_map_input = get_div_map_input(i)
-        div_mapping = divider_lookup_dict[str(div_map_input.lower())].lower()
-        return div_mapping.lower()
+        return divider_lookup_dict[str(div_map_input.lower())].lower()
 
 
 def get_sep_mapping(i):
     # Returns the separator mapping based on the divider mapping
     div_mapping = str(get_div_mapping(i)).lower()
-    sep_mapping = str(separator_lookup_dict[str(div_mapping)]).lower()
-    return sep_mapping.lower()
+    return str(separator_lookup_dict[str(div_mapping)]).lower()
 
