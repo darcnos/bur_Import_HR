@@ -82,8 +82,7 @@ def get_emp_num(i):
     empl_num_patter = re.compile('\d{6,14} -')
     if empl_num_patter.search(word) is not None:
         employee_info = re.findall(empl_num_patter, word)
-        employee_number = re.findall('\d{6,14}', str(employee_info))
-        return employee_number
+        return = re.findall('\d{6,14}', str(employee_info))
     else:
         return '999999'
 
