@@ -85,7 +85,6 @@ def get_emp_num(i):
         employee_number = re.findall('\d{6,14}', str(employee_info))
         return employee_number
     else:
-#        employee_number = ['999999']
         return '999999'
 
 
