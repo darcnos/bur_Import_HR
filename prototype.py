@@ -153,7 +153,7 @@ def get_div_mapping(i):
     elif is_w4(i) == True:
         return "W-4-Federal".lower()
     #elif emp_num == '999999':
-    #elif is_emp_dir(i) == True:
+    elif is_emp_dir(i) == True:
         return 'historical data'
     else:
         div_map_input = get_div_map_input(i)
